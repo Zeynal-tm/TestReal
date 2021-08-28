@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  testreal:
+    image: ${DOCKER_REGISTRY-}testreal
+    build:
+      context: .
+      dockerfile: TestReal\Dockerfile
+
+  postgresdb:
+    container_name: postgresdb
+    image: postgres:latest
+    restart: always
+ 
+
+networks:
+  test-network:
+    driver: bridge
+
+volumes:
+  test-api-data:
+  postgres-db-data:
+ 

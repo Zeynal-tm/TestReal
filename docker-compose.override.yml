@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  testreal:
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=${POSTGRES_HOST};Port=${POSTGRES_PORT};Database=${POSTGRES_DB};User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=https://+:444;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password1!
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - 443:443
+    networks:
+      - test-network
+    volumes:
+      - ./certs/app:/https:ro
+
+  postgresdb:
+    ports:
+     - 5432:5432 
+    volumes:
+     - postgres-db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    networks:
+     - test-network
