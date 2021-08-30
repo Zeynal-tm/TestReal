@@ -30,14 +30,14 @@ namespace TestReal.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromForm] CreateUserRegistrationViewModel viewModel)
+        public async Task<IActionResult> Post([FromBody] CreateUserRegistrationViewModel viewModel)
         {
             await userRegistrationService.Create(viewModel);
             return NoContent();
         }
 
         [HttpPut("userId")]
-        public async Task<IActionResult> Put([FromForm] UpdateUserRegistrationViewModel viewModel)
+        public async Task<IActionResult> Put([FromBody] UpdateUserRegistrationViewModel viewModel)
         {
             await userRegistrationService.Update(viewModel);
             return NoContent();

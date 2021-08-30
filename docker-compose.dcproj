@@ -10,6 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include=".env" />
+    <None Include="certs\app\aspnetapp.pfx" />
+    <None Include="docker-compose-start.ps1" />
+    <None Include="docker-compose-stop.ps1" />
     <None Include="docker-compose.override.yml">
       <DependentUpon>docker-compose.yml</DependentUpon>
     </None>

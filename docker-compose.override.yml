@@ -5,15 +5,17 @@ services:
     environment:
       - ConnectionStrings__DefaultConnection=Server=${POSTGRES_HOST};Port=${POSTGRES_PORT};Database=${POSTGRES_DB};User Id=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+:444;http://+:80
+      - ASPNETCORE_URLS=https://+:443;http://+:80
       - ASPNETCORE_Kestrel__Certificates__Default__Password=Password1!
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      - Organization__Name=TestReal
     ports:
       - 443:443
     networks:
       - test-network
     volumes:
       - ./certs/app:/https:ro
+    command: sh -c "dotnet TestReal.dll" 
 
   postgresdb:
     ports:

@@ -10,7 +10,7 @@ using TestReal.Persistence.Context;
 namespace TestReal.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210826181603_init")]
+    [Migration("20210830102831_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
