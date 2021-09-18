@@ -17,6 +17,7 @@ namespace TestReal
 {
     public class Startup
     {
+        private const string AllowedDomainsCorsPolicy = "AllowedDomains";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +29,12 @@ namespace TestReal
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTestRealPersistense(Configuration);
+
+            services.AddCors(c =>
+            {
+                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestReal", Version = "v1" }); });
         }
@@ -41,6 +48,8 @@ namespace TestReal
             }
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestReal v1"));
+
+            app.UseCors("AllowOrigin");
 
             app.UseHttpsRedirection();
 

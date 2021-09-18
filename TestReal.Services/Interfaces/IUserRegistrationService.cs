@@ -11,5 +11,6 @@ namespace TestReal.Services.Interfaces
         Task Update(UpdateUserRegistrationViewModel viewModel);
         Task<IEnumerable<UserRegistrationDto>> GetAll();
         Task<UserRegistrationDto> GetDetail(int userId);
+        Task Delete(int userId);
     }
 }

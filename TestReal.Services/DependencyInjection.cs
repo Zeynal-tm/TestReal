@@ -18,7 +18,8 @@ namespace TestReal.Services
             {
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddScoped<IAppDbContext, AppDbContext>();
+
+            services.AddScoped<IAppDbContext>(provider => provider.GetService<AppDbContext>());
             services.AddScoped<IUserRegistrationService, UserRegistrationService>();
             services.AddScoped<ICalculationService, CalculationService>();
 

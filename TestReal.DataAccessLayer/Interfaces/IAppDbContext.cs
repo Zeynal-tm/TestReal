@@ -8,5 +8,6 @@ namespace TestReal.Persistence
         DbSet<T> Set<T>() where T : class;
         Task AddAsync<T>(T entity, CancellationToken cancellationToken = default) where T : class;
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        int SaveChanges();
     }
 }

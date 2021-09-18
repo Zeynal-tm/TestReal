@@ -23,15 +23,15 @@ namespace TestReal.Services.Services
 
         public async Task<CalculationDto> Calculate(int rollingRetentionDay)
         {
-            var activatedUsers = dbContext.Set<UserRegistration>()
+            var activatedUsers = await dbContext.Set<UserRegistration>()
                 .Where(p => p.DateLastActivity >= DateTime.Now.AddDays(-rollingRetentionDay))
-                .ToListAsync().Result.Count;
+                .ToListAsync();
 
-            double registratedUsers = dbContext.Set<UserRegistration>()
+            var registratedUsers = await dbContext.Set<UserRegistration>()
                 .Where(p => p.DateRegistration <= DateTime.Now.AddDays(-rollingRetentionDay))
-                .ToListAsync().Result.Count;
+                .ToListAsync();
 
-            double result = (activatedUsers / registratedUsers) * 100;
+            double result = (activatedUsers.Count / registratedUsers.Count) * 100;
 
             var calculationDto = new CalculationDto()
             {

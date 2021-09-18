@@ -20,13 +20,13 @@ namespace TestReal.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(userRegistrationService.GetAll());
+            return Ok(await userRegistrationService.GetAll());
         }
 
         [HttpGet("{userId}")]
         public async Task<IActionResult> Get(int userId)
         {
-            return Ok(userRegistrationService.GetDetail(userId));
+            return Ok(await userRegistrationService.GetDetail(userId));
         }
 
         [HttpPost]
@@ -42,6 +42,13 @@ namespace TestReal.Controllers
             await userRegistrationService.Update(viewModel);
             return NoContent();
         }
-        
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+           await userRegistrationService.Delete(id);
+            return NoContent();
+        }
+
     }
 }

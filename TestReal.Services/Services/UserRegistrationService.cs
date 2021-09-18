@@ -59,9 +59,17 @@ namespace TestReal.Services.Services
 
         public async Task<UserRegistrationDto> GetDetail(int userId)
         {
-            var userRegistration = dbContext.Set<UserRegistration>()
-                .FirstOrDefault(p => p.UserId == userId);
+            var userRegistration = await dbContext.Set<UserRegistration>()
+                .FirstOrDefaultAsync(p => p.UserId == userId);
             return mapper.Map<UserRegistrationDto>(userRegistration);
+        }
+
+        public async Task Delete(int userId)
+        {
+            var user = await dbContext.Set<UserRegistration>().FirstOrDefaultAsync(p => p.UserId == userId);
+
+            dbContext.Set<UserRegistration>().Remove(user);
+            await dbContext.SaveChangesAsync();
         }
     }
 }
