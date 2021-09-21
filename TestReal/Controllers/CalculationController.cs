@@ -15,7 +15,7 @@ namespace TestReal.Controllers
             this.calculationService = calculationService;
         }
 
-        [HttpGet]
+        [HttpGet("{rollingRetentionDay}")]
         public async Task<IActionResult> Get(int rollingRetentionDay)
         {
             return Ok(await calculationService.Calculate(rollingRetentionDay));

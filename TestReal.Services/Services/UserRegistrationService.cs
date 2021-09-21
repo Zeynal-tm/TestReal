@@ -28,10 +28,7 @@ namespace TestReal.Services.Services
         {
             var userRegistration = mapper.Map<UserRegistration>(viewModel);
 
-            if (userRegistration.DateRegistration > userRegistration.DateLastActivity)
-            {
-                throw new Exception("Дата последней активности не может быть раньше даты регистрации");
-            }
+            userRegistration.DateLastActivity = viewModel.DateRegistration;
 
             await dbContext.AddAsync(userRegistration);
             await dbContext.SaveChangesAsync();
